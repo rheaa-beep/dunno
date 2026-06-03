@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ff69b4;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .box {
+            background: white;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            background: hotpink;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        #home {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login" class="box">
+    <h2>Login</h2>
+
+    <input type="text" id="username" placeholder="Username"><br>
+
+    <input type="password" id="password" placeholder="Password"><br>
+
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="home" class="box">
+    <h1>Welcome!</h1>
+    <p>You have successfully logged in.</p>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user.toLowerCase() === "anokzaid" && pass === "080608") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("home").style.display = "block";
+    } else {
+        alert("Wrong username or password!");
+    }
+}
+
+function logout() {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("login").style.display = "block";
+}
+</script>
+
+</body>
+</html>
