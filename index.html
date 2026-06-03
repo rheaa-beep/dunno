@@ -1,79 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #ff69b4;
-            text-align: center;
-            padding-top: 100px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂</title>
 
-        .box {
-            background: white;
-            width: 300px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 15px;
-        }
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #ff69b4;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
 
-        input {
-            width: 90%;
-            padding: 10px;
-            margin: 5px;
-        }
+.box{
+    background: white;
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
 
-        button {
-            background: hotpink;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
+h1{
+    color: #ff1493;
+}
 
-        #home {
-            display: none;
-        }
-    </style>
+input{
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button{
+    background: #ff1493;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+img{
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+#home,
+#birthdayMessage,
+#birthdayVideo{
+    display: none;
+}
+</style>
 </head>
+
 <body>
 
+<!-- LOGIN PAGE -->
+
 <div id="login" class="box">
-    <h2>Login</h2>
 
-    <input type="text" id="username" placeholder="Username"><br>
+    <h1>🔐 Login</h1>
 
-    <input type="password" id="password" placeholder="Password"><br>
+    <input type="text"
+           id="username"
+           placeholder="Username">
+
+    <input type="password"
+           id="password"
+           placeholder="Password">
+
+    <br><br>
 
     <button onclick="login()">Login</button>
+
 </div>
+
+<!-- GAMBAR -->
 
 <div id="home" class="box">
-    <h1>Welcome!</h1>
-    <p>You have successfully logged in.</p>
 
-    <button onclick="logout()">Logout</button>
+    <h1>💖 Welcome 💖</h1>
+
+    <img src="gambar.jpg" alt="Birthday Photo">
+
 </div>
 
-<script>
-function login() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+<!-- UCAPAN -->
 
-    if(user.toLowerCase() === "anokzaid" && pass === "080608") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("home").style.display = "block";
-    } else {
-        alert("Wrong username or password!");
+<div id="birthdayMessage" class="box">
+
+    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+
+    <p>
+        Selamat Hari Jadi! 💖
+        <br><br>
+
+        Semoga hari istimewa ini dipenuhi
+        dengan kegembiraan, ketawa dan
+        kenangan yang indah.
+        <br><br>
+
+        Terima kasih kerana menjadi seseorang
+        yang sangat bermakna.
+        <br><br>
+
+        Semoga semua impian awak tercapai,
+        sentiasa sihat, bahagia dan berjaya.
+        <br><br>
+
+        Enjoy your special day! 🎂🎁🎈
+    </p>
+
+</div>
+
+<!-- VIDEO -->
+
+<div id="birthdayVideo">
+
+    <video id="videoPlayer"
+           width="350"
+           controls>
+
+        <source src="video.mp4"
+                type="video/mp4">
+
+    </video>
+
+</div>
+
+<!-- AUDIO -->
+
+<audio id="birthdaySong">
+    <source src="lagu.mp3"
+            type="audio/mpeg">
+</audio>
+
+<script>
+
+function login(){
+
+    let user =
+    document.getElementById("username").value;
+
+    let pass =
+    document.getElementById("password").value;
+
+    /* TUKAR USERNAME & PASSWORD DI SINI */
+
+    if(user === "anokzaid" &&
+       pass === "080608"){
+
+        document.getElementById("login")
+        .style.display = "none";
+
+        document.getElementById("home")
+        .style.display = "block";
+
+        document.getElementById("birthdaySong")
+        .play();
+
+    }
+
+    else{
+
+        alert("Wrong Username or Password!");
+
     }
 }
 
-function logout() {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("login").style.display = "block";
-}
+const song =
+document.getElementById("birthdaySong");
+
+song.addEventListener("ended", function(){
+
+    document.getElementById("birthdayMessage")
+    .style.display = "block";
+
+    setTimeout(function(){
+
+        document.getElementById("birthdayMessage")
+        .style.display = "none";
+
+        document.getElementById("birthdayVideo")
+        .style.display = "block";
+
+        document.getElementById("videoPlayer")
+        .play();
+
+    }, 15000);
+
+});
+
 </script>
 
 </body>
