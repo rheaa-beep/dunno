@@ -3,50 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Surprise 🎂</title>
+<title>Happy Birthday DINA </title>
 
 <style>
+
 body{
     font-family: Arial, sans-serif;
-    background: #ff69b4;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
+    background:#ff69b4;
+    text-align:center;
+    margin:0;
+    padding:20px;
 }
 
 .box{
-    background: white;
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
 }
 
 h1{
-    color: #ff1493;
+    color:#ff1493;
 }
 
 input{
-    width: 90%;
-    padding: 10px;
-    margin: 8px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    width:90%;
+    padding:10px;
+    margin:8px;
+    border-radius:10px;
+    border:1px solid #ccc;
 }
 
 button{
-    background: #ff1493;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
+    background:#ff1493;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
 }
 
 #slideImage{
-    width: 250px;
-    border-radius: 15px;
+    width:250px;
+    border-radius:15px;
+    transition:opacity 1s ease-in-out;
+}
+
+#slideNote{
+    margin-top:15px;
+    color:#ff1493;
+    font-weight:bold;
+    font-size:18px;
+    animation:fadeIn 1s;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 #home,
@@ -54,6 +76,12 @@ button{
 #birthdayVideo{
     display:none;
 }
+
+video{
+    max-width:350px;
+    border-radius:15px;
+}
+
 </style>
 </head>
 
@@ -63,19 +91,23 @@ button{
 
 <div id="login" class="box">
 
-<h1>🔐 Login</h1>
+<h1>🔐 Login sini asya.tulis kat user ye "dina" dkat pass "anokzaid" 🔐</h1>
 
-<input type="text"
+<input
+type="text"
 id="username"
 placeholder="Username">
 
-<input type="password"
+<input
+type="password"
 id="password"
 placeholder="Password">
 
 <br><br>
 
-<button onclick="login()">Login</button>
+<button onclick="login()">
+Login
+</button>
 
 </div>
 
@@ -83,10 +115,15 @@ placeholder="Password">
 
 <div id="home" class="box">
 
-<h1>💖 Welcome 💖</h1>
+<h1>💖 Our Memories 💖</h1>
 
-<img id="slideImage"
+<img
+id="slideImage"
 src="gambar1.jpg">
+
+<p id="slideNote">
+💕 Selamat datang ke kejutan birthday awak.
+</p>
 
 </div>
 
@@ -108,8 +145,9 @@ kenangan yang indah.
 
 <br><br>
 
-Terima kasih kerana sentiasa menjadi
-seseorang yang sangat bermakna.
+Terima kasih kerana sentiasa ada
+dan menjadi seseorang yang sangat
+bermakna.
 
 <br><br>
 
@@ -128,29 +166,33 @@ Enjoy your special day! 🎂🎁🎈
 
 <div id="birthdayVideo">
 
-<video id="videoPlayer"
-width="350"
+<video
+id="videoPlayer"
+autoplay
+playsinline
 controls>
 
-<source src="vd.mp4"
+<source
+src="vd.mp4"
 type="video/mp4">
 
 </video>
 
 </div>
 
-<!-- LAGU -->
+<!-- AUDIO -->
 
 <audio id="birthdaySong">
 
-<source src="mitb-ty.mp3"
+<source
+src="lagu.mp3"
 type="audio/mpeg">
 
 </audio>
 
 <script>
 
-// USERNAME & PASSWORD
+// LOGIN
 
 function login(){
 
@@ -162,8 +204,10 @@ document.getElementById("password").value;
 
 /* TUKAR SINI */
 
-if(user==="dina" &&
-pass==="anokzaid"){
+if(
+user === "dina" &&
+pass === "anokzaid"
+){
 
 document.getElementById("login")
 .style.display="none";
@@ -184,15 +228,31 @@ alert("Wrong Username or Password!");
 
 }
 
-// 5 GAMBAR
+// GAMBAR
 
 const images = [
 
-"pna.jpg",
-"zna.jpg",
-"an.jpg",
-"yna.jpg",
-"pm.jpg"
+"gambar1.jpg",
+"gambar2.jpg",
+"gambar3.jpg",
+"gambar4.jpg",
+"gambar5.jpg"
+
+];
+
+// NOTE SETIAP GAMBAR
+
+const notes = [
+
+"💕 Selamat datang ke kejutan birthday awak.",
+
+"🌸 Salah satu gambar kegemaran saya.",
+
+"✨ Terima kasih untuk semua kenangan indah.",
+
+"🥰 Semoga awak sentiasa bahagia.",
+
+"🎂 Dan hari ini adalah hari istimewa awak."
 
 ];
 
@@ -203,17 +263,32 @@ function startSlideshow(){
 const slide =
 document.getElementById("slideImage");
 
+const note =
+document.getElementById("slideNote");
+
 const slideshow = setInterval(function(){
 
 current++;
 
 if(current < images.length){
 
+slide.style.opacity="0";
+
+setTimeout(function(){
+
 slide.src = images[current];
+
+note.innerHTML = notes[current];
+
+slide.style.opacity="1";
+
+},1000);
 
 }else{
 
 clearInterval(slideshow);
+
+setTimeout(function(){
 
 document.getElementById("home")
 .style.display="none";
@@ -221,7 +296,7 @@ document.getElementById("home")
 document.getElementById("birthdayMessage")
 .style.display="block";
 
-// Ucapan 15 saat
+// UCAPAN 15 SAAT
 
 setTimeout(function(){
 
@@ -235,6 +310,8 @@ document.getElementById("videoPlayer")
 .play();
 
 },15000);
+
+},1000);
 
 }
 
