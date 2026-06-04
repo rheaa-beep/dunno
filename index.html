@@ -44,53 +44,49 @@ button{
     cursor: pointer;
 }
 
-img{
+#slideImage{
     width: 250px;
     border-radius: 15px;
-    margin-top: 10px;
 }
 
 #home,
 #birthdayMessage,
 #birthdayVideo{
-    display: none;
+    display:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <div id="login" class="box">
 
-    <h1>🔐 Login</h1>
+<h1>🔐 Login</h1>
 
-    <input type="text"
-           id="username"
-           placeholder="Username">
+<input type="text"
+id="username"
+placeholder="Username">
 
-    <input type="password"
-           id="password"
-           placeholder="Password">
+<input type="password"
+id="password"
+placeholder="Password">
 
-    <br><br>
+<br><br>
 
-    <button onclick="login()">Login</button>
+<button onclick="login()">Login</button>
 
 </div>
 
-<!-- GAMBAR -->
+<!-- SLIDESHOW -->
 
 <div id="home" class="box">
 
-    <h1>💖 Welcome 💖</h1>
+<h1>💖 Welcome 💖</h1>
 
-    <img src="pna.jpg">
-    <img src="zna.jpg">
-    <img src="an.jpg">
-    <img src="pm.jpg">
-    <img src="yna.jpg" alt="Birthday Photo">
+<img id="slideImage"
+src="gambar1.jpg">
 
 </div>
 
@@ -98,27 +94,33 @@ img{
 
 <div id="birthdayMessage" class="box">
 
-    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+<h1>🎉 HAPPY BIRTHDAY 🎉</h1>
 
-    <p>
-        Selamat Hari Jadi! 💖
-        <br><br>
+<p>
 
-        Semoga hari istimewa ini dipenuhi
-        dengan kegembiraan, ketawa dan
-        kenangan yang indah.
-        <br><br>
+Selamat Hari Jadi! 💖
 
-        Terima kasih kerana menjadi seseorang
-        yang sangat bermakna.
-        <br><br>
+<br><br>
 
-        Semoga semua impian awak tercapai,
-        sentiasa sihat, bahagia dan berjaya.
-        <br><br>
+Semoga hari istimewa ini dipenuhi
+dengan kegembiraan, ketawa dan
+kenangan yang indah.
 
-        Enjoy your special day! 🎂🎁🎈
-    </p>
+<br><br>
+
+Terima kasih kerana sentiasa menjadi
+seseorang yang sangat bermakna.
+
+<br><br>
+
+Semoga semua impian awak tercapai,
+sentiasa sihat, bahagia dan berjaya.
+
+<br><br>
+
+Enjoy your special day! 🎂🎁🎈
+
+</p>
 
 </div>
 
@@ -126,79 +128,119 @@ img{
 
 <div id="birthdayVideo">
 
-    <video id="videoPlayer"
-           width="350"
-           controls>
+<video id="videoPlayer"
+width="350"
+controls>
 
-        <source src="vd.mp4"
-                type="video/mp4">
+<source src="vd.mp4"
+type="video/mp4">
 
-    </video>
+</video>
 
 </div>
 
-<!-- AUDIO -->
+<!-- LAGU -->
 
 <audio id="birthdaySong">
-    <source src="mitb-ty.mp3"
-            type="audio/mpeg">
+
+<source src="mitb-ty.mp3"
+type="audio/mpeg">
+
 </audio>
 
 <script>
 
+// USERNAME & PASSWORD
+
 function login(){
 
-    let user =
-    document.getElementById("username").value;
+let user =
+document.getElementById("username").value;
 
-    let pass =
-    document.getElementById("password").value;
+let pass =
+document.getElementById("password").value;
 
-    /* TUKAR USERNAME & PASSWORD DI SINI */
+/* TUKAR SINI */
 
-    if(user === "anokzaid" &&
-       pass === "080608"){
+if(user==="dina" &&
+pass==="anokzaid"){
 
-        document.getElementById("login")
-        .style.display = "none";
+document.getElementById("login")
+.style.display="none";
 
-        document.getElementById("home")
-        .style.display = "block";
+document.getElementById("home")
+.style.display="block";
 
-        document.getElementById("birthdaySong")
-        .play();
+startSlideshow();
 
-    }
+document.getElementById("birthdaySong")
+.play();
 
-    else{
+}else{
 
-        alert("Wrong Username or Password!");
+alert("Wrong Username or Password!");
 
-    }
 }
 
-const song =
-document.getElementById("birthdaySong");
+}
 
-song.addEventListener("ended", function(){
+// 5 GAMBAR
 
-    document.getElementById("birthdayMessage")
-    .style.display = "block";
+const images = [
 
-    setTimeout(function(){
+"pna.jpg",
+"zna.jpg",
+"an.jpg",
+"yna.jpg",
+"pm.jpg"
 
-        document.getElementById("birthdayMessage")
-        .style.display = "none";
+];
 
-        document.getElementById("birthdayVideo")
-        .style.display = "block";
+let current = 0;
 
-        document.getElementById("videoPlayer")
-        .play();
+function startSlideshow(){
 
-    }, 15000);
+const slide =
+document.getElementById("slideImage");
 
-});
+const slideshow = setInterval(function(){
+
+current++;
+
+if(current < images.length){
+
+slide.src = images[current];
+
+}else{
+
+clearInterval(slideshow);
+
+document.getElementById("home")
+.style.display="none";
+
+document.getElementById("birthdayMessage")
+.style.display="block";
+
+// Ucapan 15 saat
+
+setTimeout(function(){
+
+document.getElementById("birthdayMessage")
+.style.display="none";
+
+document.getElementById("birthdayVideo")
+.style.display="block";
+
+document.getElementById("videoPlayer")
+.play();
+
+},15000);
+
+}
+
+},5000);
+
+}
 
 </script>
 
